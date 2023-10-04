@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:trainee_login/screens/welcome_screen.dart';
 
 void main() {
   runApp(const Login());
@@ -27,7 +28,7 @@ class Login extends StatelessWidget {
 
       ),
 
-     
+      home: const Welcome(),
 
     );
     
