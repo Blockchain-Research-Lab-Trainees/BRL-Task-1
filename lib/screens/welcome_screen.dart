@@ -29,7 +29,7 @@ class Welcome extends StatelessWidget {
           const Align(
             alignment: Alignment.center,
             child: Text(
-              'Devlop     Deploy     Distribute ',
+              'Develop     Deploy     Distribute ',
               textAlign: TextAlign.center,
               style: TextStyle(
                   fontSize: 20,
