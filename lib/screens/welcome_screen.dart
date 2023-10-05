@@ -13,14 +13,19 @@ class Welcome extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+
           const Text(
             'Welcome to \n BRL Trainee',
             textAlign: TextAlign.start,
             style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
           ),
+
+
           const SizedBox(
             height: 30,
           ),
+
+          
           const Align(
             alignment: Alignment.center,
             child: Text(
@@ -32,9 +37,13 @@ class Welcome extends StatelessWidget {
                   color: Color.fromARGB(255, 46, 139, 193)),
             ),
           ),
+
+
           const SizedBox(
             height: 90,
           ),
+
+
           Center(
             child: SizedBox(
               width: double.infinity,
@@ -44,60 +53,72 @@ class Welcome extends StatelessWidget {
             ),
           ),
 
+
           const SizedBox(
-                height: 40, // Add some spacing between the images
-              ),
+            height: 40, // Add some spacing between the images
+          ),
 
-              Center(
-                child: SizedBox(
-                  // width: double.infinity,
-                   width: MediaQuery.of(context).size.width * 0.25,
-                    //height: MediaQuery.of(context).size.height * 0.75,
-                  child: Image.asset('assets/images/brl_logo.png' , fit: BoxFit.scaleDown,), 
-                ),
-              ),
 
-              const SizedBox(
-                height: 60,
+          Center(
+            child: SizedBox(
+              // width: double.infinity,
+              width: MediaQuery.of(context).size.width * 0.25,
+              //height: MediaQuery.of(context).size.height * 0.75,
+              child: Image.asset(
+                'assets/images/brl_logo.png',
+                fit: BoxFit.scaleDown,
               ),
+            ),
+          ),
 
-              Container(
+
+          const SizedBox(
+            height: 60,
+          ),
+
+
+          Container(
             height: 60,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               color: Colors.white,
             ),
-            child:  Row(
-              
+            child: Row(
               children: [
-                Expanded(
 
-                    child: MyTextButton(
-                      buttonName: 'Login',
-                      onTap: () {},
-                      bgColor: Colors.black,
-                      textColor: Colors.white,
-                    ),
+
+                Expanded(
+                  child: MyTextButton(
+                    buttonName: 'Login',
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const LoginScreen(),
+                        ),
+                      );
+                    },
+                    bgColor: Colors.black,
+                    textColor: Colors.white,
                   ),
-                  const SizedBox(
-                    width: 10,
-                    
+                ),
+
+
+                const SizedBox(
+                  width: 10,
+                ),
+
+
+                Expanded(
+                  child: MyTextButton(
+                    buttonName: 'Sign Up',
+                    onTap: () {},
+                    bgColor: Colors.black,
+                    textColor: Colors.white,
                   ),
-                   Expanded(
-                    child: MyTextButton(
-                      buttonName: 'Sign Up',
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const SignUp(),
-                          ),
-                        );
-                      },
-                      bgColor: Colors.black,
-                      textColor: Colors.white,
-                    ),
-                  ),
+                ),
+
+
               ],
             ),
           )
@@ -106,9 +127,6 @@ class Welcome extends StatelessWidget {
     )));
   }
 }
-
-
-
 
 // Extraced Class for TextButton
 
@@ -152,5 +170,3 @@ class MyTextButton extends StatelessWidget {
     );
   }
 }
-
-
