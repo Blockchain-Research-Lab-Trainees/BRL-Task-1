@@ -59,8 +59,87 @@ class Welcome extends StatelessWidget {
               const SizedBox(
                 height: 60,
               ),
+
+              Container(
+            height: 60,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: Colors.white,
+            ),
+            child:  Row(
+              
+              children: [
+                Expanded(
+
+                    child: MyTextButton(
+                      buttonName: 'Login',
+                      onTap: () {},
+                      bgColor: Colors.black,
+                      textColor: Colors.white,
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 10,
+                    
+                  ),
+                   Expanded(
+                    child: MyTextButton(
+                      buttonName: 'Sign Up',
+                      onTap: () {},
+                      bgColor: Colors.black,
+                      textColor: Colors.white,
+                    ),
+                  ),
+              ],
+            ),
+          )
         ],
       ),
     )));
   }
 }
+
+
+
+class MyTextButton extends StatelessWidget {
+  const MyTextButton({
+    Key? key,
+    required this.buttonName,
+    required this.onTap,
+    required this.bgColor,
+    required this.textColor,
+  }) : super(key: key);
+
+  final String buttonName;
+  final VoidCallback onTap;
+  final Color bgColor;
+  final Color textColor;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 60,
+      width: double.infinity,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        color: bgColor,
+      ),
+      child: TextButton(
+        style: ButtonStyle(
+          elevation: MaterialStateProperty.all(12),
+          shadowColor: MaterialStateProperty.all(Colors.black),
+          overlayColor: MaterialStateProperty.resolveWith(
+            (states) => Colors.transparent,
+          ),
+        ),
+        onPressed: onTap,
+        child: Text(
+          buttonName,
+          style: TextStyle(fontSize: 20, color: textColor),
+        ),
+      ),
+    );
+  }
+}
+
+
