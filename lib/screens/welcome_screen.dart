@@ -41,7 +41,24 @@ class Welcome extends StatelessWidget {
               // width: MediaQuery.of(context).size.width * 1,
               child: Image.asset('assets/images/img1.png'),
             ),
-          )
+          ),
+
+          const SizedBox(
+                height: 40, // Add some spacing between the images
+              ),
+
+              Center(
+                child: SizedBox(
+                  // width: double.infinity,
+                   width: MediaQuery.of(context).size.width * 0.25,
+                    //height: MediaQuery.of(context).size.height * 0.75,
+                  child: Image.asset('assets/images/img3.png' , fit: BoxFit.scaleDown,), 
+                ),
+              ),
+
+              const SizedBox(
+                height: 60,
+              ),
         ],
       ),
     )));
