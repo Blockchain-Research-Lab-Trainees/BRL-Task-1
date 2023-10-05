@@ -52,7 +52,7 @@ class Welcome extends StatelessWidget {
                   // width: double.infinity,
                    width: MediaQuery.of(context).size.width * 0.25,
                     //height: MediaQuery.of(context).size.height * 0.75,
-                  child: Image.asset('assets/images/img3.png' , fit: BoxFit.scaleDown,), 
+                  child: Image.asset('assets/images/brl_logo.png' , fit: BoxFit.scaleDown,), 
                 ),
               ),
 
