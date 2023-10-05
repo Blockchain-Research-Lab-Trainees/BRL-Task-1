@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:trainee_login/screens/signup_screen.dart';
 import 'login_screen.dart';
 
 class Welcome extends StatelessWidget {
@@ -112,7 +113,12 @@ class Welcome extends StatelessWidget {
                 Expanded(
                   child: MyTextButton(
                     buttonName: 'Sign Up',
-                    onTap: () {},
+                    onTap: () {
+                       Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const SignUp(),));
+                    },
                     bgColor: Colors.black,
                     textColor: Colors.white,
                   ),

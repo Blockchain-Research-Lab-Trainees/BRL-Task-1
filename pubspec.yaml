@@ -66,6 +66,10 @@ flutter:
     - assets/images/brl_logo.png
     - assets/images/back_arrow.png
     - assets/images/img4.png
+    - assets/images/img5.png
+    - assets/images/img6.png
+    - assets/images/img7.png
+    - assets/images/img8.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
