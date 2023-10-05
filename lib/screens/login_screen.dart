@@ -1,4 +1,5 @@
  import 'package:flutter/material.dart';
+import 'package:trainee_login/screens/welcome_screen.dart';
 
 
 class SignUp extends StatelessWidget {
@@ -7,20 +8,26 @@ class SignUp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   backgroundColor: Colors.white,
-      //   leading: IconButton(
-      //     onPressed: () {
-              
-      //         Navigator.pop(context);
-            
-      //     },
-      //     icon: const Padding(
-      //       padding: EdgeInsets.only(left: 12.0),
-      //       child: Image(image: AssetImage('assets/images/back_arrow.png', ), width: 30, fit: BoxFit.scaleDown,),
-      //     ),),
 
-        /*
+      /*
+
+
+
+
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        leading: IconButton(
+          onPressed: () {
+              
+              Navigator.pop(context);
+            
+          },
+          icon: const Padding(
+            padding: EdgeInsets.only(left: 12.0),
+            child: Image(image: AssetImage('assets/images/back_arrow.png', ), width: 30, fit: BoxFit.scaleDown,),
+          ),),
+
+        
 
 
         title: const Text('Sign Up' , style: TextStyle(color: Color.fromARGB(255, 95, 95, 95),
@@ -28,10 +35,11 @@ class SignUp extends StatelessWidget {
         fontWeight: FontWeight.bold,
 
 
+
         */
         
-        // ),),
-      
+
+
       body:  SafeArea(
         child: SingleChildScrollView(
           reverse: true ,
@@ -60,9 +68,9 @@ class SignUp extends StatelessWidget {
                       width: 10,
                     ),
                     const Padding(
-                      padding: EdgeInsets.only(left: 55.0),
-                      child: Text('Sign Up' , style: TextStyle(color: Color.fromARGB(255, 95, 95, 95),
-                        fontSize: 35,
+                      padding: EdgeInsets.only(left: 40.0),
+                      child: Text('Welcome Back' , style: TextStyle(color: Color.fromARGB(255, 95, 95, 95),
+                        fontSize: 25,
                         fontWeight: FontWeight.bold,
                         
                         
@@ -70,6 +78,8 @@ class SignUp extends StatelessWidget {
                     ),
                 ],
                 ),
+
+                
               
         
               /*
@@ -104,7 +114,7 @@ class SignUp extends StatelessWidget {
                 
                 ),
                 const SizedBox(
-                  height: 5,
+                  height: 10,
                 ),
                 const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20),
@@ -131,7 +141,7 @@ class SignUp extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(
-                  height: 5,
+                  height: 10,
                 ),
                  Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -162,7 +172,65 @@ class SignUp extends StatelessWidget {
                    
                       
                   ),
-                )
+                ),
+
+                const SizedBox(
+                  height: 30 ,
+                ),
+
+            Padding(
+              padding: const EdgeInsets.all(18.0),
+              child: Container(
+                
+              height: 60,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: Colors.white,
+              ),
+              child:  Row(
+                
+                children: [
+
+                  /*
+
+
+                  Expanded(
+            
+                      child: MySignUp(
+                        buttonName: 'Login',
+                        onTap: () {},
+                        bgColor: Colors.black,
+                        textColor: Colors.white,
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 10,
+                      
+                    ),
+
+
+                  */
+
+
+                     Expanded(
+                      child: Login(
+                        buttonName: 'Login',
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const Welcome(),
+                            ),
+                          );
+                        },
+                        bgColor: Colors.black,
+                        textColor: Colors.white,
+                      ),
+                    ),
+                ],
+              ),
+                      ),
+            )
               
             ],
               
@@ -212,3 +280,48 @@ class MyTextField extends StatelessWidget {
     );
   }
 }
+
+
+
+class Login extends StatelessWidget {
+  const Login({
+    Key? key,
+    required this.buttonName,
+    required this.onTap,
+    required this.bgColor,
+    required this.textColor,
+  }) : super(key: key);
+
+  final String buttonName;
+  final VoidCallback onTap;
+  final Color bgColor;
+  final Color textColor;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 60,
+      width: double.infinity,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        color: bgColor,
+      ),
+      child: TextButton(
+        style: ButtonStyle(
+          elevation: MaterialStateProperty.all(12),
+          shadowColor: MaterialStateProperty.all(Colors.black),
+          overlayColor: MaterialStateProperty.resolveWith(
+            (states) => Colors.transparent,
+          ),
+        ),
+        onPressed: onTap,
+        child: Text(
+          buttonName,
+          style: TextStyle(fontSize: 20, color: textColor),
+        ),
+      ),
+    );
+  }
+}
+
+
