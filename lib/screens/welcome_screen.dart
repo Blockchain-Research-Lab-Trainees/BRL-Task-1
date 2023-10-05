@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../screens/signup_screen.dart';
 
 class Welcome extends StatelessWidget {
   const Welcome({super.key});
@@ -85,7 +86,14 @@ class Welcome extends StatelessWidget {
                    Expanded(
                     child: MyTextButton(
                       buttonName: 'Sign Up',
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const SignUp(),
+                          ),
+                        );
+                      },
                       bgColor: Colors.black,
                       textColor: Colors.white,
                     ),
