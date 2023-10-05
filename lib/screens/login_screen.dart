@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:trainee_login/screens/forgot_password_screen.dart';
 import 'package:trainee_login/screens/home_screen.dart';
 //import 'package:trainee_login/screens/welcome_screen.dart';
 
@@ -8,8 +9,6 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
-
       /*
 
 
@@ -38,8 +37,6 @@ class LoginScreen extends StatelessWidget {
 
 
         */
-
-
 
       body: SafeArea(
           child: SingleChildScrollView(
@@ -83,8 +80,6 @@ class LoginScreen extends StatelessWidget {
               ],
             ),
 
-
-
             /*
         
               
@@ -99,23 +94,18 @@ class LoginScreen extends StatelessWidget {
         
                */
 
-
-
             const SizedBox(
               height: 20,
             ),
-
 
             SizedBox(
               width: double.infinity,
               child: Image.asset('assets/images/img4.png'),
             ),
 
-
             const SizedBox(
               height: 20,
             ),
-
 
             const MyTextField(
               hintText: 'Enter your Name',
@@ -123,11 +113,9 @@ class LoginScreen extends StatelessWidget {
               labelText2: 'Name',
             ),
 
-
             const SizedBox(
               height: 10,
             ),
-
 
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 20),
@@ -152,11 +140,9 @@ class LoginScreen extends StatelessWidget {
               ),
             ),
 
-
             const SizedBox(
               height: 10,
             ),
-
 
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -189,11 +175,9 @@ class LoginScreen extends StatelessWidget {
               ),
             ),
 
-
             const SizedBox(
               height: 30,
             ),
-
 
             Padding(
               padding: const EdgeInsets.all(18.0),
@@ -203,13 +187,9 @@ class LoginScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                   color: Colors.white,
                 ),
-
-
                 child: Row(
                   children: [
-                  
-
-                  /*
+                    /*
 
 
                   Expanded(
@@ -229,8 +209,6 @@ class LoginScreen extends StatelessWidget {
 
                   */
 
-
-
                     Expanded(
                       child: Login(
                         buttonName: 'Login',
@@ -248,12 +226,38 @@ class LoginScreen extends StatelessWidget {
                         textColor: Colors.white,
                       ),
                     ),
-
-
                   ],
                 ),
               ),
-            )
+            ),
+
+            // const Text(
+            //   'Forgot Password?',
+            //   style: TextStyle(
+            //     color: Color.fromARGB(255, 95, 95, 95),
+            //     fontSize: 20,
+            //     fontWeight: FontWeight.bold,
+            //   ),
+            // ),
+
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ForgotPassword(),
+                  ),
+                );
+              },
+              child: const Text(
+                'Forgot Password?',
+                style: TextStyle(
+                  color: Color.fromARGB(255, 95, 95, 95),
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
           ],
         ),
       )),
@@ -261,12 +265,7 @@ class LoginScreen extends StatelessWidget {
   }
 }
 
-
-
-
-// MytextField Widget 
-
-
+// MytextField Widget
 
 class MyTextField extends StatelessWidget {
   const MyTextField({
@@ -308,12 +307,7 @@ class MyTextField extends StatelessWidget {
   }
 }
 
-
-
-
 // Login Widget
-
-
 
 class Login extends StatelessWidget {
   const Login({
