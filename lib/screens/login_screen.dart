@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:trainee_login/screens/forgot_password_screen.dart';
 import 'package:trainee_login/screens/home_screen.dart';
-//import 'package:trainee_login/screens/welcome_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -9,34 +8,6 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      /*
-
-
-
-
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        leading: IconButton(
-          onPressed: () {
-              
-              Navigator.pop(context);
-            
-          },
-          icon: const Padding(
-            padding: EdgeInsets.only(left: 12.0),
-            child: Image(image: AssetImage('assets/images/back_arrow.png', ), width: 30, fit: BoxFit.scaleDown,),
-          ),),
-
-        
-
-
-        title: const Text('Sign Up' , style: TextStyle(color: Color.fromARGB(255, 95, 95, 95),
-        fontSize: 35,
-        fontWeight: FontWeight.bold,
-
-
-
-        */
 
       body: SafeArea(
           child: SingleChildScrollView(
@@ -79,21 +50,6 @@ class LoginScreen extends StatelessWidget {
                 ),
               ],
             ),
-
-            /*
-        
-              
-               const Center(
-                 child: Text('Sign Up' , style: TextStyle(color: Color.fromARGB(255, 95, 95, 95),
-                       fontSize: 35,
-                       fontWeight: FontWeight.bold,
-                       
-                       ),),
-                       
-               ),
-        
-               */
-
             const SizedBox(
               height: 20,
             ),
@@ -108,32 +64,39 @@ class LoginScreen extends StatelessWidget {
               hintText: 'Enter your Name',
               inputType: TextInputType.name,
               labelText2: 'Name',
+              secure1: false,
             ),
             const SizedBox(
               height: 10,
             ),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child: TextField(
-                keyboardType: TextInputType.emailAddress,
-                textInputAction: TextInputAction.next,
-                decoration: InputDecoration(
-                  contentPadding: EdgeInsets.all(20),
-                  hintText: 'Enter your Email',
-                  hintStyle: TextStyle(color: Colors.grey),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey, width: 1),
-                    borderRadius: BorderRadius.all(Radius.circular(16)),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey, width: 1),
-                    borderRadius: BorderRadius.all(Radius.circular(16)),
-                  ),
-                  labelText: 'Email',
-                  labelStyle: TextStyle(color: Colors.black54),
-                ),
-              ),
+            const MyTextField(
+              hintText: 'Enter your Email',
+              inputType: TextInputType.emailAddress,
+              labelText2: 'Email',
+              secure1: false,
             ),
+            // const Padding(
+            //   padding: EdgeInsets.symmetric(horizontal: 20),
+            //   child: TextField(
+            //     keyboardType: TextInputType.emailAddress,
+            //     textInputAction: TextInputAction.next,
+            //     decoration: InputDecoration(
+            //       contentPadding: EdgeInsets.all(20),
+            //       hintText: 'Enter your Email',
+            //       hintStyle: TextStyle(color: Colors.grey),
+            //       enabledBorder: OutlineInputBorder(
+            //         borderSide: BorderSide(color: Colors.grey, width: 1),
+            //         borderRadius: BorderRadius.all(Radius.circular(16)),
+            //       ),
+            //       focusedBorder: OutlineInputBorder(
+            //         borderSide: BorderSide(color: Colors.grey, width: 1),
+            //         borderRadius: BorderRadius.all(Radius.circular(16)),
+            //       ),
+            //       labelText: 'Email',
+            //       labelStyle: TextStyle(color: Colors.black54),
+            //     ),
+            //   ),
+            // ),
             const SizedBox(
               height: 10,
             ),
@@ -197,8 +160,61 @@ class LoginScreen extends StatelessWidget {
             const SizedBox(
               height: 30,
             ),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ForgotPassword(),
+                  ),
+                );
+              },
+              child: Padding(
+                padding: const EdgeInsets.only(left: 25, right: 25, bottom: 12),
+                child: Container(
+                  height: 60,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.white,
+                  ),
+                  child: TextButton(
+                    style: const ButtonStyle(
+                        elevation: MaterialStatePropertyAll(8),
+                        backgroundColor: MaterialStatePropertyAll(Color.fromARGB(255, 155, 153, 153)),
+                        shadowColor: MaterialStatePropertyAll(
+                            Color.fromARGB(255, 14, 14, 14)),
+                        shape: MaterialStatePropertyAll(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(16),
+                            ),
+                          ),
+                        )),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const ForgotPassword(),
+                        ),
+                      );
+                    },
+                    child: const Text(
+                      'Sign in With Google',
+                      style: TextStyle(
+                        color: Color.fromARGB(255, 10, 10, 10),
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+
+
             Padding(
-              padding: const EdgeInsets.all(18.0),
+              padding: const EdgeInsets.only(left: 25, right: 25, bottom: 10),
               child: Container(
                 height: 60,
                 decoration: BoxDecoration(
@@ -207,26 +223,6 @@ class LoginScreen extends StatelessWidget {
                 ),
                 child: Row(
                   children: [
-                    /*
-
-
-                  Expanded(
-            
-                      child: MySignUp(
-                        buttonName: 'Login',
-                        onTap: () {},
-                        bgColor: Colors.black,
-                        textColor: Colors.white,
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 10,
-                      
-                    ),
-
-
-                  */
-
                     Expanded(
                       child: Login(
                         buttonName: 'Login',
@@ -248,57 +244,6 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
             ),
-            GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const ForgotPassword(),
-                  ),
-                );
-              },
-              child: Padding(
-                padding: const EdgeInsets.only(left: 25, right: 25, bottom: 20),
-                child: Container(
-                  height: 60,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.white,
-                  ),
-                  child: TextButton(
-                    style: const ButtonStyle(
-                        elevation: MaterialStatePropertyAll(8),
-                        backgroundColor: MaterialStatePropertyAll(Colors.white),
-                        shadowColor: MaterialStatePropertyAll(
-                            Color.fromARGB(255, 114, 113, 113)),
-                        shape: MaterialStatePropertyAll(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(16),
-                            ),
-                          ),
-                        )),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const ForgotPassword(),
-                        ),
-                      );
-                    },
-                    child: const Text(
-                      'Sign in With Google',
-                      style: TextStyle(
-                        color: Color.fromARGB(255, 95, 95, 95),
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
           ],
         ),
       )),
@@ -313,12 +258,13 @@ class MyTextField extends StatelessWidget {
     super.key,
     required this.hintText,
     required this.inputType,
-    required this.labelText2,
+    required this.labelText2, required this.secure1,
   });
 
   final String hintText;
   final TextInputType inputType;
   final String labelText2;
+  final bool secure1;
 
   @override
   Widget build(BuildContext context) {
@@ -326,6 +272,7 @@ class MyTextField extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: TextField(
         keyboardType: inputType,
+        obscureText: secure1,
         textInputAction: TextInputAction.next,
         textCapitalization: TextCapitalization.words,
         decoration: InputDecoration(
