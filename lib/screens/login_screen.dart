@@ -97,26 +97,21 @@ class LoginScreen extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
-
             SizedBox(
               width: double.infinity,
               child: Image.asset('assets/images/img4.png'),
             ),
-
             const SizedBox(
               height: 20,
             ),
-
             const MyTextField(
               hintText: 'Enter your Name',
               inputType: TextInputType.name,
               labelText2: 'Name',
             ),
-
             const SizedBox(
               height: 10,
             ),
-
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: TextField(
@@ -139,11 +134,9 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
             ),
-
             const SizedBox(
               height: 10,
             ),
-
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: TextField(
@@ -174,11 +167,36 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
             ),
-
+            const SizedBox(
+              height: 5,
+            ),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ForgotPassword(),
+                  ),
+                );
+              },
+              child: const Align(
+                alignment: Alignment.centerLeft,
+                child: Padding(
+                  padding: EdgeInsets.only(left: 30),
+                  child: Text(
+                    'Forgot Password ?',
+                    style: TextStyle(
+                      color: Color.fromARGB(255, 95, 95, 95),
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
+            ),
             const SizedBox(
               height: 30,
             ),
-
             Padding(
               padding: const EdgeInsets.all(18.0),
               child: Container(
@@ -230,16 +248,6 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
             ),
-
-            // const Text(
-            //   'Forgot Password?',
-            //   style: TextStyle(
-            //     color: Color.fromARGB(255, 95, 95, 95),
-            //     fontSize: 20,
-            //     fontWeight: FontWeight.bold,
-            //   ),
-            // ),
-
             GestureDetector(
               onTap: () {
                 Navigator.push(
@@ -249,12 +257,45 @@ class LoginScreen extends StatelessWidget {
                   ),
                 );
               },
-              child: const Text(
-                'Forgot Password?',
-                style: TextStyle(
-                  color: Color.fromARGB(255, 95, 95, 95),
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 25, right: 25, bottom: 20),
+                child: Container(
+                  height: 60,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.white,
+                  ),
+                  child: TextButton(
+                    style: const ButtonStyle(
+                        elevation: MaterialStatePropertyAll(8),
+                        backgroundColor: MaterialStatePropertyAll(Colors.white),
+                        shadowColor: MaterialStatePropertyAll(
+                            Color.fromARGB(255, 114, 113, 113)),
+                        shape: MaterialStatePropertyAll(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(16),
+                            ),
+                          ),
+                        )),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const ForgotPassword(),
+                        ),
+                      );
+                    },
+                    child: const Text(
+                      'Sign in With Google',
+                      style: TextStyle(
+                        color: Color.fromARGB(255, 95, 95, 95),
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
                 ),
               ),
             ),
