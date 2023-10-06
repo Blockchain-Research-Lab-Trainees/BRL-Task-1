@@ -64,7 +64,33 @@ class SignUp extends StatelessWidget {
               inputType: TextInputType.name,
               labelText2: 'Name',
             ),
-
+            const SizedBox(
+              height: 8,
+            ),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ForgotPassword(),
+                  ),
+                );
+              },
+              child: const Padding(
+                padding: EdgeInsets.only(right: 20.0),
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: Text(
+                    'Send OTP',
+                    style: TextStyle(
+                      color: Color.fromARGB(255, 95, 95, 95),
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
+            ),
             Padding(
               padding: const EdgeInsets.all(20),
               child: Container(
@@ -77,7 +103,7 @@ class SignUp extends StatelessWidget {
                   children: [
                     Expanded(
                       child: SignUpXd(
-                        buttonName: 'Sign Up with ',
+                        buttonName: 'Sign Up',
                         onTap: () {
                           Navigator.push(
                             context,
@@ -92,70 +118,7 @@ class SignUp extends StatelessWidget {
                         textColor: Colors.white,
                       ),
                     ),
-                    
-                    // Padding(
-                    //   padding: const EdgeInsets.symmetric(
-                    //       horizontal: 8.0), 
-                    //   child: Image.asset(
-                    //     'assets/images/google.png', 
-                    //     width: 24, 
-                    //     height: 24, 
-                    //   ),
-                    // ),
                   ],
-                ),
-              ),
-            ),
-
-            // Padding(
-            //   padding: const EdgeInsets.all(20),
-            //   child: Container(
-            //     height: 60,
-            //     decoration: BoxDecoration(
-            //       borderRadius: BorderRadius.circular(10),
-            //       color: Colors.white,
-            //     ),
-            //     child: Row(
-            //       children: [
-
-            //         Expanded(
-            //           child: SignUpXd(
-            //             buttonName: 'Sign Up with ',
-            //             onTap: () {
-            //               Navigator.push(
-            //                 context,
-            //                 MaterialPageRoute(
-            //                   builder: (context) => const HomeScreenPage(
-            //                     title: 'homescreen',
-            //                   ),
-            //                 ),
-            //               );
-            //             },
-
-            //             bgColor: Colors.black,
-            //             textColor: Colors.white,
-            //           ),
-            //         ),
-            //       ],
-            //     ),
-            //   ),
-            // ),
-
-            GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const ForgotPassword(),
-                  ),
-                );
-              },
-              child: const Text(
-                'Forgot Password?',
-                style: TextStyle(
-                  color: Color.fromARGB(255, 95, 95, 95),
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
                 ),
               ),
             ),
