@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:trainee_login/screens/welcome_screen.dart';
 
+
+// FIrebase Implmentation is going to start from this commit 
 void main() {
   runApp(const Login());
 }
