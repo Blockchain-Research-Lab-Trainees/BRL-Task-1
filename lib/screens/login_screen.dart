@@ -8,7 +8,6 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       body: SafeArea(
           child: SingleChildScrollView(
         reverse: true,
@@ -60,12 +59,12 @@ class LoginScreen extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
-            const MyTextField(
-              hintText: 'Enter your Name',
-              inputType: TextInputType.name,
-              labelText2: 'Name',
-              secure1: false,
-            ),
+            // const MyTextField(
+            //   hintText: 'Enter your Name',
+            //   inputType: TextInputType.name,
+            //   labelText2: 'Name',
+            //   secure1: false,
+            // ),
             const SizedBox(
               height: 10,
             ),
@@ -74,7 +73,16 @@ class LoginScreen extends StatelessWidget {
               inputType: TextInputType.emailAddress,
               labelText2: 'Email',
               secure1: false,
+              capital: TextCapitalization.none,
             ),
+
+            // const MyTextField(
+            //   hintText: 'Enter your Password',
+            //   inputType: TextInputType.text,
+            //   labelText2: 'Password',
+            //   secure1: true,
+            //   capital: TextCapitalization.none,
+            // ),
             // const Padding(
             //   padding: EdgeInsets.symmetric(horizontal: 20),
             //   child: TextField(
@@ -181,7 +189,8 @@ class LoginScreen extends StatelessWidget {
                   child: TextButton(
                     style: const ButtonStyle(
                         elevation: MaterialStatePropertyAll(8),
-                        backgroundColor: MaterialStatePropertyAll(Color.fromARGB(255, 155, 153, 153)),
+                        backgroundColor: MaterialStatePropertyAll(
+                            Color.fromARGB(255, 214, 213, 213)),
                         shadowColor: MaterialStatePropertyAll(
                             Color.fromARGB(255, 14, 14, 14)),
                         shape: MaterialStatePropertyAll(
@@ -202,7 +211,7 @@ class LoginScreen extends StatelessWidget {
                     child: const Text(
                       'Sign in With Google',
                       style: TextStyle(
-                        color: Color.fromARGB(255, 10, 10, 10),
+                        color: Color.fromARGB(255, 81, 80, 80),
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),
@@ -211,7 +220,6 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
             ),
-
 
             Padding(
               padding: const EdgeInsets.only(left: 25, right: 25, bottom: 10),
@@ -258,13 +266,16 @@ class MyTextField extends StatelessWidget {
     super.key,
     required this.hintText,
     required this.inputType,
-    required this.labelText2, required this.secure1,
+    required this.labelText2,
+    required this.secure1,
+    required this.capital,
   });
 
   final String hintText;
   final TextInputType inputType;
   final String labelText2;
   final bool secure1;
+  final TextCapitalization capital;
 
   @override
   Widget build(BuildContext context) {
@@ -274,7 +285,7 @@ class MyTextField extends StatelessWidget {
         keyboardType: inputType,
         obscureText: secure1,
         textInputAction: TextInputAction.next,
-        textCapitalization: TextCapitalization.words,
+        textCapitalization: capital,
         decoration: InputDecoration(
           contentPadding: const EdgeInsets.all(20),
           hintText: hintText,
