@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:trainee_login/screens/forgot_password_screen.dart';
-import 'package:trainee_login/screens/home_screen.dart';
+import 'package:trainee_login/screens/login_screen.dart';
+// import 'package:trainee_login/screens/home_screen.dart';
 
 class SignUp extends StatelessWidget {
   const SignUp({super.key});
@@ -58,11 +59,29 @@ class SignUp extends StatelessWidget {
                 //width: 300,
               ),
             ),
-
             const MySignUpButton(
               hintText: 'Enter your Name',
               inputType: TextInputType.name,
               labelText2: 'Name',
+              secure1: false,
+            ),
+            const SizedBox(
+              height: 8,
+            ),
+            const MySignUpButton(
+              hintText: 'Enter your Email',
+              inputType: TextInputType.emailAddress,
+              labelText2: 'Email',
+              secure1: false,
+            ),
+            const SizedBox(
+              height: 8,
+            ),
+            const MySignUpButton(
+              hintText: 'Enter your Password',
+              inputType: TextInputType.visiblePassword,
+              labelText2: 'Password',
+              secure1: true,
             ),
             const SizedBox(
               height: 8,
@@ -77,7 +96,7 @@ class SignUp extends StatelessWidget {
                 );
               },
               child: const Padding(
-                padding: EdgeInsets.only(right: 20.0),
+                padding: EdgeInsets.only(right: 25.0),
                 child: Align(
                   alignment: Alignment.centerRight,
                   child: Text(
@@ -108,9 +127,7 @@ class SignUp extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const HomeScreenPage(
-                                title: 'homescreen',
-                              ),
+                              builder: (context) => const LoginScreen(),
                             ),
                           );
                         },
@@ -137,17 +154,20 @@ class MySignUpButton extends StatelessWidget {
     required this.hintText,
     required this.inputType,
     required this.labelText2,
+    required this.secure1,
   });
 
   final String hintText;
   final TextInputType inputType;
   final String labelText2;
+  final bool secure1;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: TextField(
+        obscureText: true,
         keyboardType: inputType,
         textInputAction: TextInputAction.next,
         textCapitalization: TextCapitalization.words,
