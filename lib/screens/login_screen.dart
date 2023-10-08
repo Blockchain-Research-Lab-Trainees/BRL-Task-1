@@ -76,35 +76,6 @@ class LoginScreen extends StatelessWidget {
               capital: TextCapitalization.none,
             ),
 
-            // const MyTextField(
-            //   hintText: 'Enter your Password',
-            //   inputType: TextInputType.text,
-            //   labelText2: 'Password',
-            //   secure1: true,
-            //   capital: TextCapitalization.none,
-            // ),
-            // const Padding(
-            //   padding: EdgeInsets.symmetric(horizontal: 20),
-            //   child: TextField(
-            //     keyboardType: TextInputType.emailAddress,
-            //     textInputAction: TextInputAction.next,
-            //     decoration: InputDecoration(
-            //       contentPadding: EdgeInsets.all(20),
-            //       hintText: 'Enter your Email',
-            //       hintStyle: TextStyle(color: Colors.grey),
-            //       enabledBorder: OutlineInputBorder(
-            //         borderSide: BorderSide(color: Colors.grey, width: 1),
-            //         borderRadius: BorderRadius.all(Radius.circular(16)),
-            //       ),
-            //       focusedBorder: OutlineInputBorder(
-            //         borderSide: BorderSide(color: Colors.grey, width: 1),
-            //         borderRadius: BorderRadius.all(Radius.circular(16)),
-            //       ),
-            //       labelText: 'Email',
-            //       labelStyle: TextStyle(color: Colors.black54),
-            //     ),
-            //   ),
-            // ),
             const SizedBox(
               height: 10,
             ),

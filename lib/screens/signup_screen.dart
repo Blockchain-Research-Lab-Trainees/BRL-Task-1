@@ -1,10 +1,31 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:trainee_login/screens/forgot_password_screen.dart';
 import 'package:trainee_login/screens/login_screen.dart';
+import 'package:trainee_login/services/firebase_auth.dart';
 // import 'package:trainee_login/screens/home_screen.dart';
 
-class SignUp extends StatelessWidget {
+class SignUp extends StatefulWidget {
   const SignUp({super.key});
+
+  @override
+  State<SignUp> createState() => _SignUpState();
+}
+
+class _SignUpState extends State<SignUp> {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController nameController = TextEditingController();
+
+  
+
+  void signUpUser() async {
+    FirebaseAuthMethods(FirebaseAuth.instance).signUpWithEmailAndPassword(
+          email: emailController.text,
+          password: passwordController.text,
+          context: context,
+        );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,29 +80,32 @@ class SignUp extends StatelessWidget {
                 //width: 300,
               ),
             ),
-            const MySignUpButton(
+              MySignUpTextField(
               hintText: 'Enter your Name',
               inputType: TextInputType.name,
               labelText2: 'Name',
               secure1: false,
+              nameController: nameController,
             ),
             const SizedBox(
               height: 8,
             ),
-            const MySignUpButton(
+            MySignUpTextField(
               hintText: 'Enter your Email',
               inputType: TextInputType.emailAddress,
               labelText2: 'Email',
               secure1: false,
+              nameController: emailController,
             ),
             const SizedBox(
               height: 8,
             ),
-            const MySignUpButton(
+            MySignUpTextField(
               hintText: 'Enter your Password',
               inputType: TextInputType.visiblePassword,
               labelText2: 'Password',
               secure1: true,
+              nameController: passwordController,
             ),
             const SizedBox(
               height: 8,
@@ -121,9 +145,10 @@ class SignUp extends StatelessWidget {
                 child: Row(
                   children: [
                     Expanded(
-                      child: SignUpXd(
+                      child: SignUpButtonXd(
                         buttonName: 'Sign Up',
                         onTap: () {
+                          signUpUser();
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -148,26 +173,29 @@ class SignUp extends StatelessWidget {
 
 // MytextField Widget
 
-class MySignUpButton extends StatelessWidget {
-  const MySignUpButton({
+class MySignUpTextField extends StatelessWidget {
+  const MySignUpTextField({
     super.key,
     required this.hintText,
     required this.inputType,
     required this.labelText2,
     required this.secure1,
+    required this.nameController,
   });
 
   final String hintText;
   final TextInputType inputType;
   final String labelText2;
   final bool secure1;
+  final TextEditingController nameController;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: TextField(
-        obscureText: true,
+      child: TextFormField(
+        controller: nameController,
+        obscureText: secure1,
         keyboardType: inputType,
         textInputAction: TextInputAction.next,
         textCapitalization: TextCapitalization.words,
@@ -193,8 +221,8 @@ class MySignUpButton extends StatelessWidget {
 
 // Login Widget
 
-class SignUpXd extends StatelessWidget {
-  const SignUpXd({
+class SignUpButtonXd extends StatelessWidget {
+  const SignUpButtonXd({
     Key? key,
     required this.buttonName,
     required this.onTap,
@@ -233,3 +261,4 @@ class SignUpXd extends StatelessWidget {
     );
   }
 }
+
