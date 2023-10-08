@@ -204,12 +204,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     onPressed: () {
                       FirebaseAuthMethods(FirebaseAuth.instance)
                           .signInWithGoogle(context);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const ForgotPassword(),
-                        ),
-                      );
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //     builder: (context) => const ForgotPassword(),
+                      //   ),
+                      // );
                     },
                     child: const Text(
                       'Sign in With Google',

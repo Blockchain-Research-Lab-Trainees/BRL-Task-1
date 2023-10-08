@@ -65,7 +65,9 @@ Future<void> emailLogin({
         password: password,
       );
       if (!_auth.currentUser!.emailVerified) {
+        // ignore: use_build_context_synchronously
         await sendEmailverifcation(context); 
+        // ignore: use_build_context_synchronously
         showSnackBar(context, 'Please verify your email');
         return;
       }
@@ -94,22 +96,26 @@ Future<void> signInWithGoogle(BuildContext context) async {
       final GoogleSignInAccount? googleSignInAccount =
           await GoogleSignIn().signIn();
 
-      final GoogleSignInAuthentication? googleSignInAuthentication =await googleSignInAccount?.authentication;
+      final GoogleSignInAuthentication? googleSignInAuthentication = 
+          await googleSignInAccount?.authentication;
 
       if ( googleSignInAuthentication?.accessToken != null && googleSignInAuthentication?.idToken != null) {
-        final AuthCredential credential = GoogleAuthProvider.credential(
+        final credential = GoogleAuthProvider.credential(
           accessToken: googleSignInAuthentication?.accessToken,
           idToken: googleSignInAuthentication?.idToken,
         );
+        
         UserCredential userCredential =
         await _auth.signInWithCredential(credential);
 
-        // if (userCredential.user != null) {
-        //   if (userCredential.additionalUserInfo?.isNewUser) {
+        if (userCredential.user != null) {
+          if (userCredential.additionalUserInfo!.isNewUser) {
+            await sendEmailverifcation(context);
+            showSnackBar(context, 'Please verify your email');
+            return;
+          }
+        }
 
-           
-        //   }
-        // }
         // if (!_auth.currentUser!.emailVerified) {
         //   await sendEmailverifcation(context);
         //   showSnackBar(context, 'Please verify your email');
