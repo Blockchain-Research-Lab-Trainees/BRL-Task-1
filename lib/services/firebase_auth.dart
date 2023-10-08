@@ -99,11 +99,20 @@ Future<void> signInWithGoogle(BuildContext context) async {
       final GoogleSignInAuthentication? googleSignInAuthentication = 
           await googleSignInAccount?.authentication;
 
-      if ( googleSignInAuthentication?.accessToken != null && googleSignInAuthentication?.idToken != null) {
-        final credential = GoogleAuthProvider.credential(
-          accessToken: googleSignInAuthentication?.accessToken,
-          idToken: googleSignInAuthentication?.idToken,
-        );
+      final AuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleSignInAuthentication?.accessToken,
+        idToken: googleSignInAuthentication?.idToken,
+      );
+
+      //if ( googleSignInAuthentication?.accessToken != null && googleSignInAuthentication?.idToken != null) {
+        // final credential = GoogleAuthProvider.credential(
+        //   accessToken: googleSignInAuthentication?.accessToken,
+        //   idToken: googleSignInAuthentication?.idToken,
+        // );
+        // credential = GoogleAuthProvider.credential(
+        //   accessToken: googleSignInAuthentication?.accessToken,
+        //   idToken: googleSignInAuthentication?.idToken,
+        // );
         
         UserCredential userCredential =
         await _auth.signInWithCredential(credential);
@@ -121,7 +130,7 @@ Future<void> signInWithGoogle(BuildContext context) async {
         //   showSnackBar(context, 'Please verify your email');
         //   return;
         // }
-      }
+    //  }
     
     }on FirebaseAuthException catch (e) {
       showSnackBar(context, e.message!);
