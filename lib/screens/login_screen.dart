@@ -1,10 +1,38 @@
+import 'package:firebase_auth/firebase_auth.dart';
+//import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:trainee_login/screens/forgot_password_screen.dart';
 import 'package:trainee_login/screens/home_screen.dart';
+import 'package:trainee_login/services/firebase_auth.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+
+  @override
+  void dispose(){
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
+
+ void loginUser() {
+     FirebaseAuthMethods(FirebaseAuth.instance).signUpWithEmailAndPassword(
+          email: emailController.text,
+          password: passwordController.text,
+          context: context,
+        );
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,12 +96,13 @@ class LoginScreen extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            const MyTextField(
+             MyTextField(
               hintText: 'Enter your Email',
               inputType: TextInputType.emailAddress,
               labelText2: 'Email',
               secure1: false,
               capital: TextCapitalization.none,
+              nameController1 : emailController,
             ),
 
             const SizedBox(
@@ -81,7 +110,8 @@ class LoginScreen extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: TextField(
+              child: TextFormField(
+                controller: passwordController,
                 obscureText: true,
                 keyboardType: TextInputType.text,
                 textInputAction: TextInputAction.next,
@@ -172,6 +202,8 @@ class LoginScreen extends StatelessWidget {
                           ),
                         )),
                     onPressed: () {
+                      FirebaseAuthMethods(FirebaseAuth.instance)
+                          .signInWithGoogle(context);
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -206,6 +238,7 @@ class LoginScreen extends StatelessWidget {
                       child: Login(
                         buttonName: 'Login',
                         onTap: () {
+                          loginUser();
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -239,7 +272,7 @@ class MyTextField extends StatelessWidget {
     required this.inputType,
     required this.labelText2,
     required this.secure1,
-    required this.capital,
+    required this.capital, required this.nameController1,
   });
 
   final String hintText;
@@ -247,12 +280,14 @@ class MyTextField extends StatelessWidget {
   final String labelText2;
   final bool secure1;
   final TextCapitalization capital;
+  final TextEditingController nameController1 ;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: TextField(
+      child: TextFormField(
+        controller: nameController1,
         keyboardType: inputType,
         obscureText: secure1,
         textInputAction: TextInputAction.next,
