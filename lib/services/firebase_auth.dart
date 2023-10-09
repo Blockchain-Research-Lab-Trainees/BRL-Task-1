@@ -136,4 +136,7 @@ Future<void> signInWithGoogle(BuildContext context) async {
       showSnackBar(context, e.message!);
     }
   } 
+
+
+  // anonymous sign in 
 }

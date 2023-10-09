@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:trainee_login/screens/forgot_password_screen.dart';
 import 'package:trainee_login/screens/login_screen.dart';
 import 'package:trainee_login/services/firebase_auth.dart';
+import 'package:trainee_login/utils/showsnackbar.dart';
 // import 'package:trainee_login/screens/home_screen.dart';
 
 class SignUp extends StatefulWidget {
@@ -16,15 +17,80 @@ class _SignUpState extends State<SignUp> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController nameController = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+
+//   bool isValidEmail(String email) {
+//   return RegExp(r'^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$').hasMatch(email);
+// }
+
+bool isValidEmail(String email) {
+  final RegExp emailPattern = RegExp(r'^[\w-]+@akgec\.ac\.in$');
+  return emailPattern.hasMatch(email);
+}
+
+
+// bool isValidPassword(String password) {
+//   return password.length >= 8;
+// }
+
+bool isValidPassword(String password) {
+  final RegExp passwordPattern = RegExp(
+    r'^(?=.*?[A-Z])(?=.*?[!@#\$&*~]).{8,}$',
+  );
+
+  return passwordPattern.hasMatch(password);
+}
+
 
   
 
-  void signUpUser() async {
-    FirebaseAuthMethods(FirebaseAuth.instance).signUpWithEmailAndPassword(
-          email: emailController.text,
-          password: passwordController.text,
+  Future<bool> signUpUser() async {
+
+    String email = emailController.text;
+    String password = passwordController.text;
+    //String name = nameController.text;
+    // FirebaseAuthMethods(FirebaseAuth.instance).signUpWithEmailAndPassword(
+    //       email: emailController.text,
+    //       password: passwordController.text,
+    //       context: context,
+    //     );
+
+    if (!isValidEmail(email)) {
+    showSnackBar(context, 'Invalid email format');
+    return false ;
+  }
+
+  if (!isValidPassword(password)) {
+    showSnackBar(context, 'Password must be at least 8 characters');
+    return false ;
+  }
+
+  //       if (_formKey.currentState!.validate()) {
+  //     FirebaseAuthMethods(FirebaseAuth.instance).signUpWithEmailAndPassword(
+  //       email: email,
+  //       password: password,
+  //       context: context,
+  //     );
+  //   }
+  // }
+  
+
+  if (_formKey.currentState!.validate()) {
+      try {
+        await FirebaseAuthMethods(FirebaseAuth.instance).signUpWithEmailAndPassword(
+          email: email,
+          password: password,
           context: context,
         );
+        return true; 
+      } catch (e) {
+        // ignore: use_build_context_synchronously
+        showSnackBar(context, 'Sign-up failed. Please try again.');
+      }
+    }
+
+    return false;
   }
 
   @override
@@ -96,6 +162,14 @@ class _SignUpState extends State<SignUp> {
               labelText2: 'Email',
               secure1: false,
               nameController: emailController,
+              validator1: (value ) {
+                if (value!.isEmpty) {
+                  return 'Please enter your email';
+                } else if (!value.contains('@')) {
+                  return 'Please enter a valid email address';
+                }
+                return null;
+              },
             ),
             const SizedBox(
               height: 8,
@@ -106,6 +180,14 @@ class _SignUpState extends State<SignUp> {
               labelText2: 'Password',
               secure1: true,
               nameController: passwordController,
+              validator1: (value) {
+                if (value!.isEmpty) {
+                  return 'Please enter your password';
+                } else if (value.length < 6) {
+                  return 'Password must be at least 6 characters!';
+                }
+                return null;
+              },
             ),
             const SizedBox(
               height: 8,
@@ -134,6 +216,7 @@ class _SignUpState extends State<SignUp> {
                 ),
               ),
             ),
+            
             Padding(
               padding: const EdgeInsets.all(20),
               child: Container(
@@ -142,25 +225,40 @@ class _SignUpState extends State<SignUp> {
                   borderRadius: BorderRadius.circular(10),
                   color: Colors.white,
                 ),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: SignUpButtonXd(
-                        buttonName: 'Sign Up',
-                        onTap: () {
-                          signUpUser();
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const LoginScreen(),
-                            ),
-                          );
-                        },
-                        bgColor: Colors.black,
-                        textColor: Colors.white,
+                child: Form(
+                  key: _formKey,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: SignUpButtonXd(
+                          buttonName: 'Sign Up',
+                          onTap: ()
+                          async {
+                              bool signUpSuccessful = await signUpUser();
+                              if (signUpSuccessful) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const LoginScreen(),
+                                  ),
+                                );
+                              }
+                          },
+                           // {
+                          //   signUpUser();
+                          //   Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //       builder: (context) => const LoginScreen(),
+                          //     ),
+                          //   );
+                          // },
+                          bgColor: Colors.black,
+                          textColor: Colors.white,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -180,7 +278,7 @@ class MySignUpTextField extends StatelessWidget {
     required this.inputType,
     required this.labelText2,
     required this.secure1,
-    required this.nameController,
+    required this.nameController, this.validator1,
   });
 
   final String hintText;
@@ -188,31 +286,36 @@ class MySignUpTextField extends StatelessWidget {
   final String labelText2;
   final bool secure1;
   final TextEditingController nameController;
+  final String? Function(String?)? validator1;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: TextFormField(
-        controller: nameController,
-        obscureText: secure1,
-        keyboardType: inputType,
-        textInputAction: TextInputAction.next,
-        textCapitalization: TextCapitalization.words,
-        decoration: InputDecoration(
-          contentPadding: const EdgeInsets.all(20),
-          hintText: hintText,
-          hintStyle: const TextStyle(color: Colors.grey),
-          enabledBorder: const OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.grey, width: 1),
-            borderRadius: BorderRadius.all(Radius.circular(16)),
+      child: Form(
+
+        child: TextFormField(
+          controller: nameController,
+          obscureText: secure1,
+          keyboardType: inputType,
+          textInputAction: TextInputAction.next,
+          textCapitalization: TextCapitalization.words,
+          decoration: InputDecoration(
+            contentPadding: const EdgeInsets.all(20),
+            hintText: hintText,
+            hintStyle: const TextStyle(color: Colors.grey),
+            enabledBorder: const OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.grey, width: 1),
+              borderRadius: BorderRadius.all(Radius.circular(16)),
+            ),
+            focusedBorder: const OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.grey, width: 1),
+              borderRadius: BorderRadius.all(Radius.circular(16)),
+            ),
+            labelText: labelText2,
+            labelStyle: const TextStyle(color: Colors.black54),
           ),
-          focusedBorder: const OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.grey, width: 1),
-            borderRadius: BorderRadius.all(Radius.circular(16)),
-          ),
-          labelText: labelText2,
-          labelStyle: const TextStyle(color: Colors.black54),
+          validator: validator1,
         ),
       ),
     );
