@@ -19,34 +19,28 @@ class _SignUpState extends State<SignUp> {
   final TextEditingController nameController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-
 //   bool isValidEmail(String email) {
 //   return RegExp(r'^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$').hasMatch(email);
 // }
 
-bool isValidEmail(String email) {
-  final RegExp emailPattern = RegExp(r'^[\w-]+@akgec\.ac\.in$');
-  return emailPattern.hasMatch(email);
-}
-
+  bool isValidEmail(String email) {
+    final RegExp emailPattern = RegExp(r'^[\w-]+@akgec\.ac\.in$');
+    return emailPattern.hasMatch(email);
+  }
 
 // bool isValidPassword(String password) {
 //   return password.length >= 8;
 // }
 
-bool isValidPassword(String password) {
-  final RegExp passwordPattern = RegExp(
-    r'^(?=.*?[A-Z])(?=.*?[!@#\$&*~]).{8,}$',
-  );
+  bool isValidPassword(String password) {
+    final RegExp passwordPattern = RegExp(
+      r'^(?=.*?[A-Z])(?=.*?[!@#\$&*~]).{8,}$',
+    );
 
-  return passwordPattern.hasMatch(password);
-}
-
-
-  
+    return passwordPattern.hasMatch(password);
+  }
 
   Future<bool> signUpUser() async {
-
     String email = emailController.text;
     String password = passwordController.text;
     //String name = nameController.text;
@@ -57,33 +51,33 @@ bool isValidPassword(String password) {
     //     );
 
     if (!isValidEmail(email)) {
-    showSnackBar(context, 'Invalid email format');
-    return false ;
-  }
+      showSnackBar(context, 'Invalid email format');
+      return false;
+    }
 
-  if (!isValidPassword(password)) {
-    showSnackBar(context, 'Password must be at least 8 characters');
-    return false ;
-  }
+    if (!isValidPassword(password)) {
+      showSnackBar(context, 'Password must be at least 8 characters');
+      return false;
+    }
 
-  //       if (_formKey.currentState!.validate()) {
-  //     FirebaseAuthMethods(FirebaseAuth.instance).signUpWithEmailAndPassword(
-  //       email: email,
-  //       password: password,
-  //       context: context,
-  //     );
-  //   }
-  // }
-  
+    //       if (_formKey.currentState!.validate()) {
+    //     FirebaseAuthMethods(FirebaseAuth.instance).signUpWithEmailAndPassword(
+    //       email: email,
+    //       password: password,
+    //       context: context,
+    //     );
+    //   }
+    // }
 
-  if (_formKey.currentState!.validate()) {
+    if (_formKey.currentState!.validate()) {
       try {
-        await FirebaseAuthMethods(FirebaseAuth.instance).signUpWithEmailAndPassword(
+        await FirebaseAuthMethods(FirebaseAuth.instance)
+            .signUpWithEmailAndPassword(
           email: email,
           password: password,
           context: context,
         );
-        return true; 
+        return true;
       } catch (e) {
         // ignore: use_build_context_synchronously
         showSnackBar(context, 'Sign-up failed. Please try again.');
@@ -146,7 +140,7 @@ bool isValidPassword(String password) {
                 //width: 300,
               ),
             ),
-              MySignUpTextField(
+            MySignUpTextField(
               hintText: 'Enter your Name',
               inputType: TextInputType.name,
               labelText2: 'Name',
@@ -162,7 +156,7 @@ bool isValidPassword(String password) {
               labelText2: 'Email',
               secure1: false,
               nameController: emailController,
-              validator1: (value ) {
+              validator1: (value) {
                 if (value!.isEmpty) {
                   return 'Please enter your email';
                 } else if (!value.contains('@')) {
@@ -216,7 +210,6 @@ bool isValidPassword(String password) {
                 ),
               ),
             ),
-            
             Padding(
               padding: const EdgeInsets.all(20),
               child: Container(
@@ -232,19 +225,18 @@ bool isValidPassword(String password) {
                       Expanded(
                         child: SignUpButtonXd(
                           buttonName: 'Sign Up',
-                          onTap: ()
-                          async {
-                              bool signUpSuccessful = await signUpUser();
-                              if (signUpSuccessful) {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => const LoginScreen(),
-                                  ),
-                                );
-                              }
+                          onTap: () async {
+                            bool signUpSuccessful = await signUpUser();
+                            if (signUpSuccessful) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const LoginScreen(),
+                                ),
+                              );
+                            }
                           },
-                           // {
+                          // {
                           //   signUpUser();
                           //   Navigator.push(
                           //     context,
@@ -278,7 +270,8 @@ class MySignUpTextField extends StatelessWidget {
     required this.inputType,
     required this.labelText2,
     required this.secure1,
-    required this.nameController, this.validator1,
+    required this.nameController,
+    this.validator1,
   });
 
   final String hintText;
@@ -293,7 +286,6 @@ class MySignUpTextField extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Form(
-
         child: TextFormField(
           controller: nameController,
           obscureText: secure1,
@@ -364,4 +356,3 @@ class SignUpButtonXd extends StatelessWidget {
     );
   }
 }
-
