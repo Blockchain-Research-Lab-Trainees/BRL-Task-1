@@ -1,9 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 //import 'package:firebase_core/firebase_core.dart';
+//import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:trainee_login/screens/forgot_password_screen.dart';
-import 'package:trainee_login/screens/home_screen.dart';
+//import 'package:trainee_login/screens/home_screen.dart';
 import 'package:trainee_login/services/firebase_auth.dart';
+//import 'package:trainee_login/utils/showsnackbar.dart';
+//import 'package:trainee_login/utils/showsnackbar.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -17,6 +20,24 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
+  String? emailError;
+  String? passwordError;
+
+
+  bool isValidEmail(String email) {
+  final RegExp emailPattern = RegExp(r'^[\w-]+@akgec\.ac\.in$');
+  return emailPattern.hasMatch(email);
+}
+
+bool isValidPassword(String password) {
+  final RegExp passwordPattern = RegExp(
+    r'^(?=.*?[A-Z])(?=.*?[!@#\$&*~]).{8,}$',
+  );
+
+  return passwordPattern.hasMatch(password);
+}
+
+
 
   @override
   void dispose(){
@@ -26,13 +47,81 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
 
- void loginUser() {
-     FirebaseAuthMethods(FirebaseAuth.instance).signUpWithEmailAndPassword(
-          email: emailController.text,
-          password: passwordController.text,
-          context: context,
-        );
-  }
+
+// void loginUser(){
+
+//   FirebaseAuthMethods(FirebaseAuth.instance).emailLogin(
+//     email: emailController.text,
+//     password: passwordController.text,
+//     context: context,
+//   );
+// }
+
+// void loginUser() async {
+//   String email = emailController.text;
+//   String password = passwordController.text;
+
+//   // Validate email
+//   if (email.isEmpty || !isValidEmail(email)) {
+//     setState(() {
+//       emailError = 'Please enter a valid email address';
+//       passwordError = null; // Reset password error
+//     });
+//     return;
+//   }
+
+//   // Validate password
+//   if (password.isEmpty || !isValidPassword(password)) {
+//     setState(() {
+//       passwordError = 'Password must be at least 8 characters';
+//       emailError = null; // Reset email error
+//     });
+//     return;
+//   }
+
+//   try {
+//     // Sign in with email and password
+//     await FirebaseAuthMethods(FirebaseAuth.instance).signUpWithEmailAndPassword(
+//       email: email,
+//       password: password,
+//       context: context
+//     );
+
+//     // Check if the user is fully authenticated
+//     if (FirebaseAuth.instance.currentUser != null && FirebaseAuth.instance.currentUser!.emailVerified) {
+//       Navigator.push(
+//         context,
+//         MaterialPageRoute(
+//           builder: (context) => const HomeScreenPage(
+//             title: 'homescreen',
+//           ),
+//         ),
+//       );
+//     } else {
+//       // User is not fully authenticated, show an error message
+//       showSnackBar(context, 'Email is not verified. Please verify your email.');
+//     }
+//   } on FirebaseAuthException catch (e) {
+//     if (e.code == 'user-not-found' || e.code == 'wrong-password') {
+//       // User email or password is incorrect
+//       showSnackBar(context, 'Incorrect email or password. Please try again.');
+//     } else if (e.code == 'user-disabled') {
+//       // User account is disabled
+//       showSnackBar(context, 'Your account is disabled. Please contact support.');
+//     } else {
+//       // Other authentication errors
+//       showSnackBar(context, 'Sign-in failed. Please check your credentials.');
+//     }
+//   }
+// }
+
+void loginUser() async {
+  FirebaseAuthMethods(FirebaseAuth.instance).emailLogin(
+    email: emailController.text,
+    password: passwordController.text,
+    context: context,
+  );
+}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -239,14 +328,14 @@ class _LoginScreenState extends State<LoginScreen> {
                         buttonName: 'Login',
                         onTap: () {
                           loginUser();
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const HomeScreenPage(
-                                title: 'homescreen',
-                              ),
-                            ),
-                          );
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(
+                          //     builder: (context) => const HomeScreenPage(
+                          //       title: 'homescreen',
+                          //     ),
+                          //   ),
+                          // );
                         },
                         bgColor: Colors.black,
                         textColor: Colors.white,
