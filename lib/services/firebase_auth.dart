@@ -136,6 +136,62 @@ Future<void> emailLogin({
   } 
 
 
+// Googele Sign in
+
+Future<void> signInWithGoogle(BuildContext context) async {
+  try {
+    final GoogleSignInAccount? googleSignInAccount =
+        await GoogleSignIn().signIn();
+
+    final GoogleSignInAuthentication? googleSignInAuthentication =
+        await googleSignInAccount?.authentication;
+
+    final AuthCredential credential = GoogleAuthProvider.credential(
+      accessToken: googleSignInAuthentication?.accessToken,
+      idToken: googleSignInAuthentication?.idToken,
+    );
+
+    UserCredential userCredential =
+        await FirebaseAuth.instance.signInWithCredential(credential);
+
+    if (userCredential.user != null) {
+      if (userCredential.additionalUserInfo!.isNewUser) {
+        await sendEmailverifcation(context);
+        showSnackBar(context, 'Please verify your email');
+      } else {
+        // Navigate to the home screen if authenticated
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const HomeScreenPage(
+              title: 'homescreen',
+            ),
+          ),
+        );
+      }
+    } else {
+      // Handle the case where userCredential.user is null
+      showSnackBar(context, 'Authentication failed. Please try again.');
+    }
+  } on FirebaseAuthException catch (e) {
+    // Handle FirebaseAuthException errors
+    showSnackBar(context, e.message!);
+  } catch (e) {
+    // Handle other errors
+    showSnackBar(context, 'Authentication failed. Please try again.');
+  }
+}
+
+
+}
+
+
+
+
+// Google Sign In raw code 
+
+
+
   // Google Sign In
 // Future<void> signInWithGoogle(BuildContext context) async {
 //     try {
@@ -183,52 +239,3 @@ Future<void> emailLogin({
 //       showSnackBar(context, e.message!);
 //     }
 //   } 
-
-
-Future<void> signInWithGoogle(BuildContext context) async {
-  try {
-    final GoogleSignInAccount? googleSignInAccount =
-        await GoogleSignIn().signIn();
-
-    final GoogleSignInAuthentication? googleSignInAuthentication =
-        await googleSignInAccount?.authentication;
-
-    final AuthCredential credential = GoogleAuthProvider.credential(
-      accessToken: googleSignInAuthentication?.accessToken,
-      idToken: googleSignInAuthentication?.idToken,
-    );
-
-    UserCredential userCredential =
-        await FirebaseAuth.instance.signInWithCredential(credential);
-
-    if (userCredential.user != null) {
-      if (userCredential.additionalUserInfo!.isNewUser) {
-        await sendEmailverifcation(context);
-        showSnackBar(context, 'Please verify your email');
-      } else {
-        // Navigate to the home screen if authenticated
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const HomeScreenPage(
-              title: 'homescreen',
-            ),
-          ),
-        );
-      }
-    } else {
-      // Handle the case where userCredential.user is null
-      showSnackBar(context, 'Authentication failed. Please try again.');
-    }
-  } on FirebaseAuthException catch (e) {
-    // Handle FirebaseAuthException errors
-    showSnackBar(context, e.message!);
-  } catch (e) {
-    // Handle other errors
-    showSnackBar(context, 'Authentication failed. Please try again.');
-  }
-}
-
-
-  // anonymous sign in 
-}
