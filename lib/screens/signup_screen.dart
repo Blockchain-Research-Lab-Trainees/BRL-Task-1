@@ -228,10 +228,11 @@ class _SignUpState extends State<SignUp> {
                           onTap: () async {
                             bool signUpSuccessful = await signUpUser();
                             if (signUpSuccessful) {
+                            
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => const LoginScreen(),
+                                  builder: (context) => const LoginScreen(title: 'Sign Up',),
                                 ),
                               );
                             }

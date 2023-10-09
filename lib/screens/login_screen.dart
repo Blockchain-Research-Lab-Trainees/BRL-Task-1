@@ -9,7 +9,7 @@ import 'package:trainee_login/services/firebase_auth.dart';
 //import 'package:trainee_login/utils/showsnackbar.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+  const LoginScreen({super.key, required String title});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();

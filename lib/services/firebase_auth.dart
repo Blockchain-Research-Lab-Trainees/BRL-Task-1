@@ -30,6 +30,7 @@ class FirebaseAuthMethods {
 //     }
 // }
 
+// Email Sign up
 
 Future<void> signUpWithEmailAndPassword({
     required String email,
@@ -181,6 +182,21 @@ Future<void> signInWithGoogle(BuildContext context) async {
     showSnackBar(context, 'Authentication failed. Please try again.');
   }
 }
+
+// Forgot Password
+
+Future<void> sendPasswordResetEmail(BuildContext context, String email) async {
+  try {
+    await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+    showSnackBar(context, 'Password reset email sent. Check your inbox.');
+  } on FirebaseAuthException catch (e) {
+    showSnackBar(context, e.message!);
+  } catch (e) {
+    showSnackBar(context, 'Password reset failed. Please try again.');
+  }
+}
+
+// Sign Out
 
 
 }
