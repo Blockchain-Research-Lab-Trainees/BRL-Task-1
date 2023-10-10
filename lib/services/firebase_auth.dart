@@ -60,14 +60,27 @@ Future<void> emailLogin({
         email: email,
         password: password,
       );
+
+      /*
      
-      ScaffoldMessenger.of(context).showSnackBar(
+      // ScaffoldMessenger.of(context).showSnackBar(
+      //   const SnackBar(
+      //     content: Text('Login successful'),
+         
+      //   ),
+      // );
+
+      */
+
+      
+      if (_auth.currentUser!.emailVerified) {
+
+         ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Login successful'),
          
         ),
       );
-      if (_auth.currentUser!.emailVerified) {
 
       /*
 
