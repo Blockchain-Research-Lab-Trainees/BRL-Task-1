@@ -94,15 +94,6 @@ class ForgotPassword extends StatelessWidget {
             
 
             ),
-            // TextField(
-            //   controller: emailController,
-            //   keyboardType: TextInputType.emailAddress,
-            //   decoration: const InputDecoration(labelText: 'Email'),
-            // ),
-            // ElevatedButton(
-            //   onPressed: resetPassword,
-            //   child: const Text('Reset Password'),
-            // ),
 
             Padding(
               padding: const EdgeInsets.only(left: 25, right: 25, bottom: 10),
