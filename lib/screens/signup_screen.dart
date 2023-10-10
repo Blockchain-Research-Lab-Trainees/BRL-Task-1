@@ -19,18 +19,11 @@ class _SignUpState extends State<SignUp> {
   final TextEditingController nameController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-//   bool isValidEmail(String email) {
-//   return RegExp(r'^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$').hasMatch(email);
-// }
 
   bool isValidEmail(String email) {
     final RegExp emailPattern = RegExp(r'^[\w-]+@akgec\.ac\.in$');
     return emailPattern.hasMatch(email);
   }
-
-// bool isValidPassword(String password) {
-//   return password.length >= 8;
-// }
 
   bool isValidPassword(String password) {
     final RegExp passwordPattern = RegExp(
@@ -43,12 +36,6 @@ class _SignUpState extends State<SignUp> {
   Future<bool> signUpUser() async {
     String email = emailController.text;
     String password = passwordController.text;
-    //String name = nameController.text;
-    // FirebaseAuthMethods(FirebaseAuth.instance).signUpWithEmailAndPassword(
-    //       email: emailController.text,
-    //       password: passwordController.text,
-    //       context: context,
-    //     );
 
     if (!isValidEmail(email)) {
       showSnackBar(context, 'Invalid email format');
@@ -56,18 +43,10 @@ class _SignUpState extends State<SignUp> {
     }
 
     if (!isValidPassword(password)) {
-      showSnackBar(context, 'Password must be at least 8 characters');
+      showSnackBar(context, 'Invalid password format (must contain 1 uppercase, 1 special character and must be at least 8 characters long)');
       return false;
     }
 
-    //       if (_formKey.currentState!.validate()) {
-    //     FirebaseAuthMethods(FirebaseAuth.instance).signUpWithEmailAndPassword(
-    //       email: email,
-    //       password: password,
-    //       context: context,
-    //     );
-    //   }
-    // }
 
     if (_formKey.currentState!.validate()) {
       try {
@@ -145,6 +124,7 @@ class _SignUpState extends State<SignUp> {
               inputType: TextInputType.name,
               labelText2: 'Name',
               secure1: false,
+              capital: TextCapitalization.words,
               nameController: nameController,
             ),
             const SizedBox(
@@ -155,6 +135,7 @@ class _SignUpState extends State<SignUp> {
               inputType: TextInputType.emailAddress,
               labelText2: 'Email',
               secure1: false,
+              capital: TextCapitalization.none,
               nameController: emailController,
               validator1: (value) {
                 if (value!.isEmpty) {
@@ -174,6 +155,7 @@ class _SignUpState extends State<SignUp> {
               labelText2: 'Password',
               secure1: true,
               nameController: passwordController,
+              capital: TextCapitalization.none,
               validator1: (value) {
                 if (value!.isEmpty) {
                   return 'Please enter your password';
@@ -272,7 +254,7 @@ class MySignUpTextField extends StatelessWidget {
     required this.labelText2,
     required this.secure1,
     required this.nameController,
-    this.validator1,
+    this.validator1, required this.capital,
   });
 
   final String hintText;
@@ -281,6 +263,7 @@ class MySignUpTextField extends StatelessWidget {
   final bool secure1;
   final TextEditingController nameController;
   final String? Function(String?)? validator1;
+  final TextCapitalization capital;
 
   @override
   Widget build(BuildContext context) {
@@ -292,7 +275,7 @@ class MySignUpTextField extends StatelessWidget {
           obscureText: secure1,
           keyboardType: inputType,
           textInputAction: TextInputAction.next,
-          textCapitalization: TextCapitalization.words,
+          textCapitalization: capital,
           decoration: InputDecoration(
             contentPadding: const EdgeInsets.all(20),
             hintText: hintText,
