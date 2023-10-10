@@ -277,7 +277,7 @@ class _SignUpState extends State<SignUp> {
 
                           bgColor: Colors.black,
                           textColor: Colors.white,
-                          
+
                         ),
                       ),
                     ],
