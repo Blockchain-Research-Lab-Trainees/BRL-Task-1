@@ -4,7 +4,7 @@ import 'package:trainee_login/screens/login_screen.dart';
 import 'package:trainee_login/utils/showsnackbar.dart';
 
 class ForgotPassword extends StatelessWidget {
-  const ForgotPassword({Key? key}) : super(key: key);
+  const ForgotPassword({Key? key, required String title}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

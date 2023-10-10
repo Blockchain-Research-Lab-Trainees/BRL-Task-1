@@ -9,27 +9,6 @@ class FirebaseAuthMethods {
   final FirebaseAuth _auth ;
   FirebaseAuthMethods(this._auth);
 
-
-  // Email Sign up 
-
-//   Future<void> signUpWithEmailAndPassword({
-//     required String email,
-//     required String password,
-//     required BuildContext context,
-  
-//   }) async {
-//     try {
-//       await _auth.createUserWithEmailAndPassword(
-//         email: email,
-//         password: password,
-//       );
-//       await sendEmailverifcation(context);
-//     } on FirebaseAuthException catch (e) {
-
-//       showSnackBar(context, e.message!);
-//     }
-// }
-
 // Email Sign up
 
 Future<void> signUpWithEmailAndPassword({
@@ -70,20 +49,22 @@ Future<void> emailLogin({
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Login successful'),
-          duration: Duration(seconds: 5), // Optional: Set duration
+         
         ),
       );
       if (_auth.currentUser!.emailVerified) {
 
-         Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const HomeScreenPage(
-            title: 'homescreen',
-          ),
-        ),
-      );
+      //    Navigator.push(
+      //   context,
+      //   MaterialPageRoute(
+      //     builder: (context) => const HomeScreenPage(
+      //       title: 'homescreen',
+      //     ),
+      //   ),
+      // );
       
+
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => HomeScreenPage(title: 'Homepage',)));
         
       } else {
         
@@ -161,14 +142,16 @@ Future<void> signInWithGoogle(BuildContext context) async {
         showSnackBar(context, 'Please verify your email');
       } else {
         // Navigate to the home screen if authenticated
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const HomeScreenPage(
-              title: 'homescreen',
-            ),
-          ),
-        );
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(
+        //     builder: (context) => const HomeScreenPage(
+        //       title: 'homescreen',
+        //     ),
+        //   ),
+        // );
+
+         Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => HomeScreenPage(title: 'Homepage',)));
       }
     } else {
       // Handle the case where userCredential.user is null

@@ -25,6 +25,7 @@ class _SignUpState extends State<SignUp> {
     return emailPattern.hasMatch(email);
   }
 
+
   bool isValidPassword(String password) {
     final RegExp passwordPattern = RegExp(
       r'^(?=.*?[A-Z])(?=.*?[!@#\$&*~]).{8,}$',
@@ -170,12 +171,14 @@ class _SignUpState extends State<SignUp> {
             ),
             GestureDetector(
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const ForgotPassword(),
-                  ),
-                );
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(
+                //     builder: (context) => const ForgotPassword(),
+                //   ),
+                // );
+
+                 Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => ForgotPassword(title: 'Homepage',)));
               },
               child: const Padding(
                 padding: EdgeInsets.only(right: 25.0),
@@ -211,12 +214,14 @@ class _SignUpState extends State<SignUp> {
                             bool signUpSuccessful = await signUpUser();
                             if (signUpSuccessful) {
                             
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const LoginScreen(title: 'Sign Up',),
-                                ),
-                              );
+                              // Navigator.push(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //     builder: (context) => const LoginScreen(title: 'Sign Up',),
+                              //   ),
+                              // );
+
+                               Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => LoginScreen(title: 'Sign Up',)));
                             }
                           },
                           // {

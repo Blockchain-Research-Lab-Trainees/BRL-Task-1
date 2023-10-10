@@ -1,12 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
-//import 'package:firebase_core/firebase_core.dart';
-//import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:trainee_login/screens/forgot_password_screen.dart';
-//import 'package:trainee_login/screens/home_screen.dart';
 import 'package:trainee_login/services/firebase_auth.dart';
-//import 'package:trainee_login/utils/showsnackbar.dart';
-//import 'package:trainee_login/utils/showsnackbar.dart';
+
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key, required String title});
@@ -46,74 +42,6 @@ bool isValidPassword(String password) {
     super.dispose();
   }
 
-
-
-// void loginUser(){
-
-//   FirebaseAuthMethods(FirebaseAuth.instance).emailLogin(
-//     email: emailController.text,
-//     password: passwordController.text,
-//     context: context,
-//   );
-// }
-
-// void loginUser() async {
-//   String email = emailController.text;
-//   String password = passwordController.text;
-
-//   // Validate email
-//   if (email.isEmpty || !isValidEmail(email)) {
-//     setState(() {
-//       emailError = 'Please enter a valid email address';
-//       passwordError = null; // Reset password error
-//     });
-//     return;
-//   }
-
-//   // Validate password
-//   if (password.isEmpty || !isValidPassword(password)) {
-//     setState(() {
-//       passwordError = 'Password must be at least 8 characters';
-//       emailError = null; // Reset email error
-//     });
-//     return;
-//   }
-
-//   try {
-//     // Sign in with email and password
-//     await FirebaseAuthMethods(FirebaseAuth.instance).signUpWithEmailAndPassword(
-//       email: email,
-//       password: password,
-//       context: context
-//     );
-
-//     // Check if the user is fully authenticated
-//     if (FirebaseAuth.instance.currentUser != null && FirebaseAuth.instance.currentUser!.emailVerified) {
-//       Navigator.push(
-//         context,
-//         MaterialPageRoute(
-//           builder: (context) => const HomeScreenPage(
-//             title: 'homescreen',
-//           ),
-//         ),
-//       );
-//     } else {
-//       // User is not fully authenticated, show an error message
-//       showSnackBar(context, 'Email is not verified. Please verify your email.');
-//     }
-//   } on FirebaseAuthException catch (e) {
-//     if (e.code == 'user-not-found' || e.code == 'wrong-password') {
-//       // User email or password is incorrect
-//       showSnackBar(context, 'Incorrect email or password. Please try again.');
-//     } else if (e.code == 'user-disabled') {
-//       // User account is disabled
-//       showSnackBar(context, 'Your account is disabled. Please contact support.');
-//     } else {
-//       // Other authentication errors
-//       showSnackBar(context, 'Sign-in failed. Please check your credentials.');
-//     }
-//   }
-// }
 
 void loginUser() async {
   FirebaseAuthMethods(FirebaseAuth.instance).emailLogin(
@@ -176,12 +104,6 @@ void loginUser() async {
             const SizedBox(
               height: 20,
             ),
-            // const MyTextField(
-            //   hintText: 'Enter your Name',
-            //   inputType: TextInputType.name,
-            //   labelText2: 'Name',
-            //   secure1: false,
-            // ),
             const SizedBox(
               height: 10,
             ),
@@ -206,7 +128,8 @@ void loginUser() async {
                 textInputAction: TextInputAction.next,
                 decoration: InputDecoration(
                   suffixIcon: IconButton(
-                    onPressed: () {},
+                    onPressed: () { 
+                    },
                     icon: const Icon(
                       Icons.remove_red_eye_rounded,
                       color: Colors.grey,
@@ -233,12 +156,13 @@ void loginUser() async {
             ),
             GestureDetector(
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const ForgotPassword(),
-                  ),
-                );
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(
+                //     builder: (context) => const ForgotPassword(),
+                //   ),
+                // );
+                 Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => ForgotPassword(title: 'Homepage',)));
               },
               child: const Align(
                 alignment: Alignment.centerLeft,
@@ -260,12 +184,14 @@ void loginUser() async {
             ),
             GestureDetector(
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const ForgotPassword(),
-                  ),
-                );
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(
+                //     builder: (context) => const ForgotPassword(),
+                //   ),
+                // );
+
+                 Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => ForgotPassword(title: 'Homepage',)));
               },
               child: Padding(
                 padding: const EdgeInsets.only(left: 25, right: 25, bottom: 12),
@@ -293,12 +219,6 @@ void loginUser() async {
                     onPressed: () {
                       FirebaseAuthMethods(FirebaseAuth.instance)
                           .signInWithGoogle(context);
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => const ForgotPassword(),
-                      //   ),
-                      // );
                     },
                     child: const Text(
                       'Sign in With Google',
@@ -328,14 +248,6 @@ void loginUser() async {
                         buttonName: 'Login',
                         onTap: () {
                           loginUser();
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(
-                          //     builder: (context) => const HomeScreenPage(
-                          //       title: 'homescreen',
-                          //     ),
-                          //   ),
-                          // );
                         },
                         bgColor: Colors.black,
                         textColor: Colors.white,
