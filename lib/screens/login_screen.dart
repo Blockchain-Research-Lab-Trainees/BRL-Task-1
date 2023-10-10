@@ -50,6 +50,8 @@ void loginUser() async {
     context: context,
   );
 }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,24 +65,30 @@ void loginUser() async {
             ),
             Row(
               children: [
+
                 IconButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },
+
                   icon: const Padding(
                     padding: EdgeInsets.only(left: 12.0),
                     child: Image(
                       image: AssetImage(
                         'assets/images/back_arrow.png',
                       ),
+
                       width: 30,
                       fit: BoxFit.scaleDown,
+
                     ),
                   ),
                 ),
+
                 const SizedBox(
                   width: 10,
                 ),
+
                 const Padding(
                   padding: EdgeInsets.only(left: 40.0),
                   child: Text(
@@ -94,19 +102,28 @@ void loginUser() async {
                 ),
               ],
             ),
+
+
             const SizedBox(
               height: 20,
             ),
+
+
             SizedBox(
               width: double.infinity,
               child: Image.asset('assets/images/img4.png'),
             ),
+
+
             const SizedBox(
               height: 20,
             ),
+
+
             const SizedBox(
               height: 10,
             ),
+
              MyTextField(
               hintText: 'Enter your Email',
               inputType: TextInputType.emailAddress,
@@ -119,22 +136,30 @@ void loginUser() async {
             const SizedBox(
               height: 10,
             ),
+
             Padding(
+
               padding: const EdgeInsets.symmetric(horizontal: 20),
+
               child: TextFormField(
                 controller: passwordController,
                 obscureText: true,
                 keyboardType: TextInputType.text,
                 textInputAction: TextInputAction.next,
                 decoration: InputDecoration(
+
                   suffixIcon: IconButton(
                     onPressed: () { 
                     },
+
                     icon: const Icon(
                       Icons.remove_red_eye_rounded,
                       color: Colors.grey,
                     ),
+
                   ),
+
+
                   contentPadding: const EdgeInsets.all(20),
                   hintText: 'Enter your Password',
                   hintStyle: const TextStyle(color: Colors.grey),
@@ -142,26 +167,42 @@ void loginUser() async {
                     borderSide: BorderSide(color: Colors.grey, width: 1),
                     borderRadius: BorderRadius.all(Radius.circular(16)),
                   ),
+
+
                   focusedBorder: const OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.grey, width: 1),
                     borderRadius: BorderRadius.all(Radius.circular(16)),
                   ),
+
+
                   labelText: 'Password',
                   labelStyle: const TextStyle(color: Colors.black54),
+
+
                 ),
               ),
             ),
+
+
             const SizedBox(
               height: 5,
             ),
+
+
             GestureDetector(
               onTap: () {
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(
-                //     builder: (context) => const ForgotPassword(),
-                //   ),
-                // );
+
+                /*
+
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ForgotPassword(),
+                  ),
+                );
+
+                */
+
                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => ForgotPassword(title: 'Homepage',)));
               },
               child: const Align(
@@ -179,31 +220,35 @@ void loginUser() async {
                 ),
               ),
             ),
+
+
             const SizedBox(
               height: 30,
             ),
+
+
             GestureDetector(
               onTap: () {
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(
-                //     builder: (context) => const ForgotPassword(),
-                //   ),
-                // );
 
                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => ForgotPassword(title: 'Homepage',)));
               },
+
               child: Padding(
                 padding: const EdgeInsets.only(left: 25, right: 25, bottom: 12),
                 child: Container(
+
                   height: 60,
                   width: double.infinity,
+
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     color: Colors.white,
+
                   ),
                   child: TextButton(
+
                     style: const ButtonStyle(
+
                         elevation: MaterialStatePropertyAll(8),
                         backgroundColor: MaterialStatePropertyAll(
                             Color.fromARGB(255, 214, 213, 213)),
@@ -213,13 +258,17 @@ void loginUser() async {
                           RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(
                               Radius.circular(16),
+
+
                             ),
                           ),
                         )),
+
                     onPressed: () {
                       FirebaseAuthMethods(FirebaseAuth.instance)
                           .signInWithGoogle(context);
                     },
+                    
                     child: const Text(
                       'Sign in With Google',
                       style: TextStyle(

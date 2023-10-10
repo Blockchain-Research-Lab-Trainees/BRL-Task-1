@@ -63,16 +63,16 @@ Future<void> emailLogin({
 
       /*
      
-      // ScaffoldMessenger.of(context).showSnackBar(
-      //   const SnackBar(
-      //     content: Text('Login successful'),
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Login successful'),
          
-      //   ),
-      // );
+        ),
+      );
 
       */
 
-      
+
       if (_auth.currentUser!.emailVerified) {
 
          ScaffoldMessenger.of(context).showSnackBar(
@@ -106,7 +106,7 @@ Future<void> emailLogin({
           const SnackBar(
             content: Text(
                 'A link is sent to your email. Please verify your email address to continue'),
-            duration: Duration(seconds: 5), // Optional: Set duration
+            duration: Duration(seconds: 5), 
           ),
         );
       }
@@ -132,7 +132,7 @@ Future<void> emailLogin({
       }
     } catch (e) {
      showSnackBar(context, e.toString()); 
-      // print(e);
+     
     }
   
   }
@@ -174,15 +174,6 @@ Future<void> signInWithGoogle(BuildContext context) async {
         await sendEmailverifcation(context);
         showSnackBar(context, 'Please verify your email');
       } else {
-        // Navigate to the home screen if authenticated
-        // Navigator.push(
-        //   context,
-        //   MaterialPageRoute(
-        //     builder: (context) => const HomeScreenPage(
-        //       title: 'homescreen',
-        //     ),
-        //   ),
-        // );
 
          Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => HomeScreenPage(title: 'Homepage',)));
       }
