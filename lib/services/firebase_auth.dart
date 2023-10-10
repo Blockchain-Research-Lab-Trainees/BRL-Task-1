@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-//import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:trainee_login/screens/home_screen.dart';
@@ -21,18 +20,34 @@ Future<void> signUpWithEmailAndPassword({
         email: email,
         password: password,
       );
+
       await sendEmailverifcation(context);
     } on FirebaseAuthException catch (e) {
-      // if you want to display your own custom error message
+      if (e.code == 'weak-password') {
+        showSnackBar(context, 'The password provided is too weak.');
+      } else if (e.code == 'email-already-in-use') {
+        showSnackBar(context, 'The account already exists for that email.');
+      }
+
+
+      /*
+
       if (e.code == 'weak-password') {
         print('The password provided is too weak.');
       } else if (e.code == 'email-already-in-use') {
         print('The account already exists for that email.');
       }
       showSnackBar(
-          context, e.message!); // Displaying the usual firebase error message
+          context, e.message!);
+
+          
+      */
+
+      
     }
   }
+
+
 // Email Login 
 
 Future<void> emailLogin({
@@ -54,15 +69,20 @@ Future<void> emailLogin({
       );
       if (_auth.currentUser!.emailVerified) {
 
-      //    Navigator.push(
-      //   context,
-      //   MaterialPageRoute(
-      //     builder: (context) => const HomeScreenPage(
-      //       title: 'homescreen',
-      //     ),
-      //   ),
-      // );
-      
+      /*
+
+
+         Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const HomeScreenPage(
+            title: 'homescreen',
+          ),
+        ),
+      );
+
+
+      */
 
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => HomeScreenPage(title: 'Homepage',)));
         
