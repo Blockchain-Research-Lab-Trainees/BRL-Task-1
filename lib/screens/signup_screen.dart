@@ -43,12 +43,6 @@ class _SignUpState extends State<SignUp> {
   Future<bool> signUpUser() async {
     String email = emailController.text;
     String password = passwordController.text;
-    //String name = nameController.text;
-    // FirebaseAuthMethods(FirebaseAuth.instance).signUpWithEmailAndPassword(
-    //       email: emailController.text,
-    //       password: passwordController.text,
-    //       context: context,
-    //     );
 
     if (!isValidEmail(email)) {
       showSnackBar(context, 'Invalid email format');
@@ -56,18 +50,9 @@ class _SignUpState extends State<SignUp> {
     }
 
     if (!isValidPassword(password)) {
-      showSnackBar(context, 'Password must be at least 8 characters');
+      showSnackBar(context, 'Invalid password format (min. 8 chars ,  1 Uppercase, 1 Special Character)');
       return false;
     }
-
-    //       if (_formKey.currentState!.validate()) {
-    //     FirebaseAuthMethods(FirebaseAuth.instance).signUpWithEmailAndPassword(
-    //       email: email,
-    //       password: password,
-    //       context: context,
-    //     );
-    //   }
-    // }
 
     if (_formKey.currentState!.validate()) {
       try {
