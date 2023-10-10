@@ -203,7 +203,12 @@ Future<void> sendPasswordResetEmail(BuildContext context, String email) async {
   }
 }
 
-// Sign Out
+// Checking is user is logged in or not if logged in then only login for once 
+
+// Future<void> checkUserloginonce() async {
+//   FirebaseAuth.instance
+//   .authStateChanges();
+// }
 
 
 }
