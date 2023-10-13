@@ -9,6 +9,9 @@ class FirebaseAuthMethods {
   final FirebaseAuth _auth ;
   FirebaseAuthMethods(this._auth);
 
+
+  // Starting error handling if any !
+
 // Email Sign up
 
 Future<void> signUpWithEmailAndPassword({
