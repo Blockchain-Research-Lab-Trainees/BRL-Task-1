@@ -23,10 +23,22 @@ class _SignUpState extends State<SignUp> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
 
-  bool isValidEmail(String email) {
-    final RegExp emailPattern = RegExp(r'^[\w-]+@akgec\.ac\.in$');
-    return emailPattern.hasMatch(email);
-  }
+//   // bool isValidEmail(String email) {
+//   //   final RegExp emailPattern = RegExp(r'^[\w-]+@akgec\.ac\.in$');
+//   //   return emailPattern.hasMatch(email);
+//   // }
+
+//   bool isValidEmail(String email) {
+//   final gmailRegex = RegExp(r'^[\w-]+(\.[\w-]+)*@gmail.com$');
+//   return gmailRegex.hasMatch(email);
+// }
+
+bool isValidEmail(String email) {
+  final akgecRegex = RegExp(r'^[\w-]+@akgec\.ac\.in$');
+  final gmailRegex = RegExp(r'^[\w-]+(\.[\w-]+)*@gmail.com$');
+  return akgecRegex.hasMatch(email) || gmailRegex.hasMatch(email);
+}
+
 
 
   bool isValidPassword(String password) {
