@@ -1,7 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:trainee_login/screens/forgot_password_screen.dart';
+//import 'package:trainee_login/screens/forgot_password_screen.dart';
 import 'package:trainee_login/screens/login_screen.dart';
+import 'package:trainee_login/screens/otp_scrren.dart';
 import 'package:trainee_login/services/firebase_auth.dart';
 import 'package:trainee_login/utils/showsnackbar.dart';
 
@@ -138,7 +139,7 @@ class _SignUpState extends State<SignUp> {
               nameController: nameController,
               validator1: (value) {
                 if (value!.isEmpty) {
-                  return 'Please enter your name'; 
+                  return 'Please enter your name';
                 }
                 return null;
               },
@@ -200,9 +201,7 @@ class _SignUpState extends State<SignUp> {
                 Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                        builder: (BuildContext context) => ForgotPassword(
-                              title: 'Homepage',
-                            )));
+                        builder: (BuildContext context) => OTPScreen()));
               },
               child: const Padding(
                 padding: EdgeInsets.only(right: 25.0),
