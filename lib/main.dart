@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:trainee_login/screens/welcome_screen.dart';
+//import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:trainee_login/screens/home_screen.dart';
+import 'package:trainee_login/screens/login_screen.dart';
+//import 'package:trainee_login/screens/welcome_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
@@ -20,25 +23,54 @@ class Login extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+     return  MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Login',
-      
-      theme: ThemeData(
-        
-        primarySwatch: Colors.blue,
-        useMaterial3: true,
-        textTheme: GoogleFonts.latoTextTheme(
-          Theme.of(context).textTheme,
-        ),
-        scaffoldBackgroundColor: Colors.white,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-
+      home: FutureBuilder<bool>(
+        future: getUserLoginStatus(),
+        builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            if (snapshot.data == true) {
+              return const HomeScreenPage(title: 'Homepage');
+            } else {
+              return const LoginScreen(title: '',); 
+            }
+          } else {
+            return const CircularProgressIndicator();
+          }
+        },
       ),
-
-      home: const Welcome(),
-
     );
+   
+}
+}
+
+
+Future<bool> getUserLoginStatus() async {
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+  final isLoggedIn = prefs.getBool('isLoggedIn');
+  return isLoggedIn ?? false; 
+}
+
+
+
+ // 
+    // MaterialApp(
+    //   debugShowCheckedModeBanner: false,
+    //   title: 'Login',
+      
+    //   theme: ThemeData(
+        
+    //     primarySwatch: Colors.blue,
+    //     useMaterial3: true,
+    //     textTheme: GoogleFonts.latoTextTheme(
+    //       Theme.of(context).textTheme,
+    //     ),
+    //     scaffoldBackgroundColor: Colors.white,
+    //     visualDensity: VisualDensity.adaptivePlatformDensity,
+
+    //   ),
+
+    //   home: const Welcome(),
+
+    // );
     
-}
-}
