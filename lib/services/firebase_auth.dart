@@ -75,8 +75,6 @@ Future<void> emailLogin({
       await saveUserLoginStatus(true);
 
       
-
-      
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(

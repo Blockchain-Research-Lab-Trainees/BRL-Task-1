@@ -227,13 +227,13 @@ void loginUser() async {
             ),
 
 
-            GestureDetector(
-              onTap: () {
+           // GestureDetector(
+            //  onTap: () {
 
-                 Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => ForgotPassword(title: 'Homepage',)));
-              },
+              //   Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => ForgotPassword(title: 'Homepage',)));
+             // },
 
-              child: Padding(
+               Padding(
                 padding: const EdgeInsets.only(left: 25, right: 25, bottom: 12),
                 child: Container(
 
@@ -280,7 +280,7 @@ void loginUser() async {
                   ),
                 ),
               ),
-            ),
+           // ),
 
             Padding(
               padding: const EdgeInsets.only(left: 25, right: 25, bottom: 10),
