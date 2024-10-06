@@ -5,6 +5,8 @@ import 'package:trainee_login/screens/home_screen.dart';
 import 'package:trainee_login/screens/login_screen.dart';
 //import 'package:trainee_login/screens/welcome_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:trainee_login/screens/signup_screen.dart';
+import 'package:trainee_login/screens/welcome_screen.dart';
 import 'firebase_options.dart';
 
 
@@ -32,7 +34,7 @@ class Login extends StatelessWidget {
             if (snapshot.data == true) {
               return const HomeScreenPage(title: 'Homepage');
             } else {
-              return const LoginScreen(title: '',); 
+              return const Welcome(); 
             }
           } else {
             return const CircularProgressIndicator();
